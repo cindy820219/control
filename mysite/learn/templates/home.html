@@ -1,0 +1,56 @@
+<!-- ->
+
+<!----------------------------------------------->
+<!--
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} 默認標題 {% endblock %} - 這是什麼 </title>
+    </head>
+
+
+    <body>
+    <!-- navigation bar 
+    {% include 'nav.html' %} ---
+    
+    <ul id="top">
+        <li>
+            <a class="{% block home %}{% endblock %}" href="/">Home</a>
+        </li>
+        <li>
+            <a class="{% block myaccount %}{% endblock %}" href="/profile/">CO2</a>
+        </li>
+        <li>
+            <a class="{% block createsr %}{% endblock %}" href="/create/staffrequest/">temperature & humidity</a>
+        </li>
+    </ul>
+    
+    {% block content %}
+        <div>這裡是默認內容，所有繼承自這個模板，如果不覆蓋就顯示這裡的默認内容。</div>
+    {% endblock %}
+
+    </body>
+</html>
+
+-->
+
+{% for post in post_list %}
+    <div>
+        <div class="thumbnail">
+            <img src="{{ post.photo }}" alt="">
+        </div>
+    </div>
+{% endfor %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Welcome </title>
+    </head>
+    
+    <body>
+        Mom, I'm here.
+    </body>
+</html>
