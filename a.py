@@ -53,13 +53,13 @@ while True:
             print("Sensor:", Sensor, "; CO2:",CO2)
 
             if Sensor == 1:
-                x1 = x1 + 1
                 f = open("note1.txt", 'a')
                 f.write(str(x1)+ ',' + str(tm) + ',' + str(CO2) + '\n') 
+                x1 = x1 + 1
             else: 
-                x2 = x2 + 1
                 f = open("note2.txt", 'a')
                 f.write(str(x2)+ ',' + str(tm) + ',' + str(CO2) + '\n') 
+                x2 = x2 + 1
             f.close()
             
 
