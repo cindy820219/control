@@ -50,6 +50,7 @@ def home(request):
 
 ### app add : step 3
 # print welcome
+
 def index(request):
-    return HttpResponse(u"歡迎光臨")
+    return HttpResponse(u"歡迎光臨 CO2 Conc.")
 

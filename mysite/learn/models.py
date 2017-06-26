@@ -6,5 +6,17 @@ from django.db import models
 ### for picture ! 
 class Post(models.Model):
     photo = models.URLField(blank=True)
+    
     def __str__(self):
         return self.title
+
+### 
+class Article(models.Model):
+    #~ Sensor = models.TextField(u'Sensor')
+    Sensor = models.CharField(u'Sensor', max_length = 50)
+    Time = models.CharField(u'Time', max_length = 50)
+    Tpye = models.CharField(u'Tpye', max_length = 50)
+    Data = models.CharField(u'Data', max_length = 50)
+    
+    def __unicode__(self):
+        return self.Sensor

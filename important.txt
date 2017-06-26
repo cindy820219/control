@@ -1,0 +1,2 @@
+sudo chown nien:nien note1.txt note2.txt
+wc -l [file]
