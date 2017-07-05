@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: Beige;
+            }
+
+            h1 {
+                color: Gray;
+                text-align: center;
+            }
+
+            p {
+                font-family: verdana;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>CO2 Conc.</h1>
+        <p>This is a MAP.</p>
+
+        <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+        
+        <!-- picture -->
+        {% for post in post_list %}
+            <div>
+                <div class="thumbnail">
+                    <img src="{{ post.photo }}" alt="">
+                </div>
+            </div>
+        {% endfor %}
+        
+        <!-- button -->
+        <br>
+        <br>
+        <form>
+            <select name="YourLocation">
+                　<option value="Sensor_1">Sensor 1</option>
+                　<option value="Sensor_2">Sensor 2</option>
+            </select>
+        </form>
+
+        <form>
+            <input type="radio" name="location" value="CO2"> CO2
+            <input type="radio" name="location" value="Tem"> Tem
+            <input type="radio" name="location" value="Hum"> Hum
+        </form>
+
+        <button type="button">OK</button>
+
+        
+        <!-- text -->
+        <body>
+            <p> </p>
+            <p>Mom, I'm here.</p>
+        
+        
+        <!-- DB ! -->
+        {% for r in article_list %}
+            <table " border="1">
+                <tr>
+                    <th>Sensor</th>
+                    <th>Type</th>
+                    <th>Time</th>
+                    <th>Data</th>
+                </tr>
+
+                <tr>
+                    <td rowspan="3"> {{r.Sensor}} </td>
+                    <td> {{r.Tpye}} </td>
+                    <td> {{r.Time}} </td>  
+                    <td> {{r.Data}} </td>
+                </tr>
+            </table>
+        {% endfor %}
+
+    </body>
+</html>
+
+
+
+
+------------------------------------------------------------------
+
+
+{% load staticfiles %} 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello</title>
+        
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/highcharts/highcharts.js' %}"></script>
+        <script type="text/javascript">
+            $(function () {
+            $.getJSON("{% url 'bar' %}", function(data) {
+            $('#container').highcharts(data);
+            });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="container" style="height: 300px"></div>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

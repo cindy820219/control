@@ -1,56 +1,180 @@
-<!-- ->
-
-<!----------------------------------------------->
-<!--
-
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
     <head>
-        <title>{% block title %} 默認標題 {% endblock %} - 這是什麼 </title>
+        <meta charset="utf-8"> 
+        <title> Enrironmental Monitoring </title>
+        <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <script src="Chart.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script type = "text/javascript" src = "script.js"> 
+<!--
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+-->
+        <style>
+            body {
+                background-color: Beige;
+                padding-left: 15px;
+            }
+
+            h1 {
+                color: Gray;
+                text-align: center;
+                
+            }
+
+            p {
+                color: #FCA205;
+                font-family: 'Lobster';
+                font-size: 20px;
+            }
+
+            <li><a href="#identifier" data-toggle="tab">Home</a></li>
+            
+        </style>
     </head>
-
-
+    
     <body>
-    <!-- navigation bar 
-    {% include 'nav.html' %} ---
-    
-    <ul id="top">
-        <li>
-            <a class="{% block home %}{% endblock %}" href="/">Home</a>
-        </li>
-        <li>
-            <a class="{% block myaccount %}{% endblock %}" href="/profile/">CO2</a>
-        </li>
-        <li>
-            <a class="{% block createsr %}{% endblock %}" href="/create/staffrequest/">temperature & humidity</a>
-        </li>
-    </ul>
-    
-    {% block content %}
-        <div>這裡是默認內容，所有繼承自這個模板，如果不覆蓋就顯示這裡的默認内容。</div>
-    {% endblock %}
+        <h1>CO2 Conc.</h1>
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#home" data-toggle="tab">
+                    Home !
+                </a>
+            </li>
+            
+            <li><a href="#S1" data-toggle="tab">Sensor 1</a></li>
+            <li><a href="#S2" data-toggle="tab">Sensor 2</a></li>
+            <li><a href="#S3" data-toggle="tab">Sensor 3</a></li>
+            <li><a href="#S4" data-toggle="tab">Sensor 4</a></li>
+            <li><a href="#S5" data-toggle="tab">Sensor 5</a></li>
+            <li><a href="#S6" data-toggle="tab">Sensor 6</a></li>
+            <li><a href="#S7" data-toggle="tab">Sensor 7</a></li>
+            <li><a href="#S8" data-toggle="tab">Sensor 8</a></li>
+            <li><a href="#S9" data-toggle="tab">Sensor 9</a></li>
+        </ul>
+        
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                <p>這是白舞菇監測網站首頁</p>
+            </div>
+            <div class="tab-pane fade" id="S1">
+                <p>這是 Sensor 1 RRRRR</p>
+            </div>
+            <div class="tab-pane fade" id="S2">
+                <p>Sensor 2 ~~~~~</p>
+            </div>
+            <div class="tab-pane fade" id="S3">
+                <p>Sensor 33333 </p>
+            </div>
+            <div class="tab-pane fade" id="S4">
+                <p>Sensor -- 4 -- </p>
+            </div>
+            <div class="tab-pane fade" id="S5">
+                <p> Give me FIVE </p>
+            </div>
+            <div class="tab-pane fade" id="S6">
+                <p> 666666 </p>
+            </div>
+            <div class="tab-pane fade" id="S7">
+                <p>Sensor 7 </p>
+            </div>
+            <div class="tab-pane fade" id="S8">
+                <p> 設備 8888 </p>
+            </div>
+            <div class="tab-pane fade" id="S9">
+                <p> 最後一台！ </p>
+            </div>
+        </div>
+        
+        
+        <!-- button -->
+        <form>
+            <input type="radio" name="location" value="CO2"> CO2
+            <input type="radio" name="location" value="Tem"> Tem
+            <input type="radio" name="location" value="Hum"> Hum
+            <button type="button">OK</button>
+        </form>
 
-    </body>
-</html>
+        <br>
+        <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+<!--
+        <canvas id="myChart" width="400" height="400"></canvas>
+-->
+        <div id="container" style="width:50%; height:400px; float:right;"></div>
+        
+        
+        
+        <p>Database </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th>Sensor</th>
+                  <th>Type</th>
+                  <th>Time</th>
+                  <th>Data</th>
+                </tr>
+            </thead>
 
+        {% for r in article_list %}
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td rowspan="3"> {{r.Sensor}} </td>
+                    <td> {{r.Tpye}} </td>
+                    <td> {{r.Time}} </td>  
+                    <td> {{r.Data}} </td>
+                </tr>
+              </tbody>
+            </table>
+        {% endfor %}
+
+        <!-- DB ! -->
+<!--
+        {% for r in article_list %}
+            <table " border="1">
+                <tr>
+                    <th>Sensor</th>
+                    <th>Type</th>
+                    <th>Time</th>
+                    <th>Data</th>
+                </tr>
+
+                <tr>
+                    <td rowspan="3"> {{r.Sensor}} </td>
+                    <td> {{r.Tpye}} </td>
+                    <td> {{r.Time}} </td>  
+                    <td> {{r.Data}} </td>
+                </tr>
+            </table>
+        {% endfor %}
 -->
 
-{% for post in post_list %}
-    <div>
-        <div class="thumbnail">
-            <img src="{{ post.photo }}" alt="">
-        </div>
-    </div>
-{% endfor %}
+<!--
+        <em>aaa </em>
+        <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+        <code>#include python3 a  sjijrij;</code>
+-->
 
+<!--
+        <-- picture
+        {% for post in post_list %}
+            <div>
+                <div class="thumbnail">
+                    <img src="{{ post.photo }}" alt="">
+                </div>
+            </div>
+        {% endfor %}
+        
+-->
+        <!-- text
+        <body>
+            <p> </p>
+            <p>Mom, I'm here.</p> -->
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> CO2 Conc. </title>
-    </head>
-    
-    <body>
-        Mom, I'm here.
     </body>
 </html>

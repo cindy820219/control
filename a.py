@@ -43,6 +43,7 @@ while True:
     response = se.readline()
     if response != "b''":
         tm = time.strftime("%H:%M:%S")
+        Day = time.strftime("%D")
         response = str(response)
         ### CO2 
         if response[13:14] == 'c':

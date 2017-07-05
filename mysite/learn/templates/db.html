@@ -1,0 +1,19 @@
+ <!-- DB ! -->
+    {% for r in article_list %}
+        <table>
+            <tr>
+                <th>Sensor</th>
+                <th>Type</th>
+                <th>Time</th>
+                <th>Data</th>
+            </tr>
+        
+            <tr>
+                <td> {{r.Sensor}} </td>
+                <td> {{r.Tpye}} </td>
+                <td> {{r.Time}} </td>
+                <td> {{r.Data}} </td>
+            </tr>
+        
+        </table>
+    {% endfor %}

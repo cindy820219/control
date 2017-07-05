@@ -31,7 +31,46 @@
 
     2. 將生成的py文件應用到數據庫
     $ python3 manage.py migrate
+    
+    3. 檢查
+    $ python3 manage.py check
+    
+    4. 翻譯成 資料庫語言
+    $ python3 manage.py sqlmigrate [APP] [0000] ---> 版本編號
+    
+    5. 針對目前的模型先建立一個migration檔
+    $ python3 manage.py makemigrations [APP] ---> 針對其中一個 APP 做
+    $ python3 manage.py makemigrations       ---> 全部的 APP 都做
+    
+    ------------------------------------------------------------
+    
+    6. go into shell
+    $ python3 manage.py shell
+    
+    7. import and create objects!
+    $ from [APP- learn].models import [Class- Article, Post]
+    $ Article.objects.create(Article(Sensor="3",Data="555",Time="00:00:00",Tpye="T"))
+    
+    8. read objects 
+    $ for a in [Class- Article].objects.all():
+        print(a.Tpye)
 
+    9. modify 
+    $ a = Article.objects.get(Tpye="article 1")
+    $ a.Tpye = "Article"
+    $ a.save()
+    
+    10. add 
+    $ p1 = Article(Sensor="3",Data="555",Time="00:00:00",Tpye="T")
+    $ p1.save()
+
+    # http://dokelung-blog.logdown.com/posts/220606-django-notes-5-model-and-database
+    
+    11. get data 
+    $ r = [APP- learn][0]
+    $ r.Sensor
+    $ r.Data
+    
 4. 使用伺服器
     $ python3 manage.py runserver
     # ^C
@@ -48,33 +87,23 @@
     ERROR : That port is already in use
     $ sudo fuser -k 8000/tcp
     '''
-
-5. 清空數據庫
+    1. 清空數據庫
     $ python3 manage.py flush
 
-6. create super user
+5. create super user
     $ python3 manage.py createsuperuser
     # 按照提示输入用戶名和對應的密碼（郵箱可以留空，用戶名和密碼必填）
     # 修改用戶密碼
     $ python3 manage.py changepassword [username]
 
-7. 導出數據 導入數據
+6. 導出數據 導入數據
     $ python3 manage.py dumpdata appname > appname.json
     $ python3 manage.py loaddata appname.json
-
-8. Django interactive (!!!!!!!!)
-    $ python3 manage.py shell
-
-9. database shell
-    $ python3 manage.py dbshell
     
-10. More command !
+7. More command !
     $ python3 manage.py
 
-11. interactive 
-    $ python3 manage.py shell
-
-12. 模板表 (template): (index.html)
+8. 模板表 (template): (index.html)
     名稱   描述              特徵              範例
     ------------------------------------------------------------
     變量   內容填到模板的位置                    {{ sum }}
@@ -82,11 +111,11 @@
     註釋   註釋                                {# this is comment}
     文字   純文字             包含 html 標籤     just text
 
-13. highchart 
+9. highchart 
     http://www.cnblogs.com/4admin2root/archive/2012/09/06/2673735.html    
     https://www.highcharts.com/demo/dynamic-update
 
-14. template under app
+10. template under app
     ### add template/home.html
     ### urls.py ; add new 
     from learn import views as learn_views
@@ -113,26 +142,4 @@
 
     # 邏輯判斷
     http://code.ziqiangxuetang.com/django/django-template2.html
-    
-15. db ---> models ! http://code.ziqiangxuetang.com/django/django-models.html
-    create app
-    # /settings.py
-    INSTALLED_APPS
-    # /models.py
-    class ():
-    # connet to db , cd to project ./manage.py
-    python3 manage.py makemigrations
-    python3 manage.py migrate
-    # complete !
-    Running migrations:
-    Applying people.0001_initial... OK
-
-    # python3 manage.py shell
-    from people.models import Person
-    Person.objects.create(name="WeizhongTu", age=24)
-        <Person: Person object>
-    Person.objects.get(name="WeizhongTu")
-
-16. forms
-    
-    
+    https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#std:templatetag-autoescape

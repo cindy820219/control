@@ -23,11 +23,16 @@ from django.conf.urls import url
 from django.contrib import admin
 ### app add : step 4, import app 
 from learn import views as learn_views
-
+#!
+#~ from django.conf.urls import include
 
 urlpatterns = [
+    #!
+    #~ url(r'^grappelli/', include('grappelli.urls')),
+    url(r'^$', learn_views.home, name='home'),
+    url(r'^$', learn_views.dynamic_update, name='dynamic_update'),
     url(r'^admin/', admin.site.urls),
-     url(r'^$', learn_views.home, name='home'),
+    
     
     #~ url(r'^$', learn_views.dynamic_update, name='dynamic_update'),
     ### add templates menu 
