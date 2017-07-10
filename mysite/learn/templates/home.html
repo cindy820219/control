@@ -1,7 +1,20 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <meta charset="utf-8"> 
+    <title> Enrironmental Monitoring </title>
+    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="Chart.js"></script>
+    <script src="canvasjs.min.js"></script>
+    
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
     <script type="text/javascript">
+        
     window.onload = function() {
         var chart = new CanvasJS.Chart("chartContainer", {
             title: {
@@ -34,19 +47,9 @@
         chart.render();
     }
     </script>
-    <script src="canvasjs.min.js"></script>
     
-    <meta charset="utf-8"> 
-    <title> Enrironmental Monitoring </title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="Chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-     <style>
+    <style>
         body {
             background-color: Beige;
             padding-left: 15px;
@@ -55,7 +58,6 @@
         h1 {
             color: Gray;
             text-align: center;
-            
         }
 
         p {
@@ -63,9 +65,7 @@
             font-family: 'Lobster';
             font-size: 20px;
         }
-
         <li><a href="#identifier" data-toggle="tab">Home</a></li>
-        
     </style>
 </head>
 
@@ -95,6 +95,34 @@
             </div>
             <div class="tab-pane fade" id="S1">
                 <p>這是 Sensor 1 RRRRR</p>
+                    <p>Database </p>
+                    <table class="table table-striped">
+                    <thead>
+                        <tr>
+                          <th>Sensor</th>
+                          <th>Type</th>
+                          <th>Time</th>
+                          <th>Data</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                    {% for r in article_list %}
+                        {% if r.Sensor == 1 %}
+                            <table class="table table-striped">
+                                <tr>
+                                    <td rowspan="3"> {{r.Sensor}} </td>
+                                    <td> {{r.Tpye}} </td>
+                                    <td> {{r.Time}} </td>  
+                                    <td> {{r.Data}} </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        {% endif %}
+                    {% endfor %}
+                
+                
+                
             </div>
             <div class="tab-pane fade" id="S2">
                 <p>Sensor 2 ~~~~~</p>
@@ -120,40 +148,12 @@
             </div>
             <div class="tab-pane fade" id="S9">
                 <p> 最後一台！ </p>
-                <p>Database </p>
-                
-                
-                
-                <table class="table table-striped">
-                <thead>
-                    <tr>
-                      <th>Sensor</th>
-                      <th>Type</th>
-                      <th>Time</th>
-                      <th>Data</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                {% for r in article_list %}
-                <table class="table table-striped">
-                    <tr>   
-                        <td rowspan="3"> {{r.Sensor}} </td>
-                        <td> {{r.Tpye}} </td>
-                        <td> {{r.Time}} </td>  
-                        <td> {{r.Data}} </td>
-                    </tr>
-                  </tbody>
-                </table>
-                {% endfor %}
-        
-        
-        
             </div>
         </div>
         <br><br>
         
         <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+        
         <div id="chartContainer" style="height: 400px; width: 100%;"></div>
          
         <p>Database </p>
@@ -166,21 +166,20 @@
               <th>Data</th>
             </tr>
         </thead>
-        
+
         <tbody>
         {% for r in article_list %}
-        <table class="table table-striped">
-            <tr>
-                <td rowspan="3"> {{r.Sensor}} </td>
-                <td> {{r.Tpye}} </td>
-                <td> {{r.Time}} </td>  
-                <td> {{r.Data}} </td>
-            </tr>
-          </tbody>
-        </table>
+                <table class="table table-striped">
+                    <tr>
+                        <td rowspan="3"> {{r.Sensor}} </td>
+                        <td> {{r.Tpye}} </td>
+                        <td> {{r.Time}} </td>  
+                        <td> {{r.Data}} </td>
+                    </tr>
+                  </tbody>
+                </table>
         {% endfor %}
-        
-        
+
 </body>
 
 </html>

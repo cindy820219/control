@@ -143,3 +143,18 @@
     # 邏輯判斷
     http://code.ziqiangxuetang.com/django/django-template2.html
     https://docs.djangoproject.com/en/1.7/ref/templates/builtins/#std:templatetag-autoescape
+
+
+11. chart 
+    https://canvasjs.com/editor/?id=https://canvasjs.com/example/gallery/line/moble_subscriptions/
+    http://www.bootcss.com/p/chart.js/docs/
+    https://canvasjs.com/editor/?id=https://canvasjs.com/example/gallery/dynamic/multiseries_line/
+    http://www.fusioncharts.com/charts/real-time-line-chart-dual-y/
+    https://epochjs.github.io/epoch/real-time/
+    https://codepen.io/ztrayner/pen/VeJMRL
+    http://jsfiddle.net/gh/get/library/pure/highcharts/highcharts/tree/master/samples/highcharts/demo/dynamic-update/
+    http://bootstrapmaster.com/live/simpliq/charts-xcharts.html
+    
+    https://www.highcharts.com/demo/dynamic-update/sand-signika
+    
+    
