@@ -42,16 +42,6 @@ def home(request):
     post_list = Post.objects.all()
     article_list = Article.objects.all()
     return render(request, 'home.html', locals())
-    
-
-#~ def home(request):
-    #~ post_list = Post.objects.all()
-    #~ return render(request, 'home.html', {'post_list': post_list,})
-    
-#~ def home(request):
-    #~ article_list = Article.objects.all()
-    #~ return render_to_response('db.html', locals())
-
 
 # --- Create your views here. --- #
 ### real template part 2 
@@ -71,7 +61,6 @@ def home(request):
     #~ info_dict = {'site': u'自强学堂', 'content': u'各种IT技术教程'}
     #~ return render(request, 'tem.html', {'info_dict': info_dict})
 
-
 ### add templates : step 1, create file /app/templates/home.html
 ### add templates : step 2, add some html code in home.html
 ### add templates : step 3
@@ -80,6 +69,3 @@ def home(request):
 
 ### app add : step 3
 # print welcome
-
-#~ def index(request):
-    #~ return HttpResponse(u"歡迎光臨 CO2 Conc.")
