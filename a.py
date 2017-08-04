@@ -9,18 +9,18 @@ import struct
 import time                             # time immedita
 
 ### draw 
-import matplotlib.pyplot as plt
-from tkinter import *
-import numpy as np
-import matplotlib.animation as animation
-from matplotlib import style
+#~ import matplotlib.pyplot as plt
+#~ from tkinter import *
+#~ import numpy as np
+#~ import matplotlib.animation as animation
+#~ from matplotlib import style
 
 ### port
 se = serial.Serial()
 se.baudrate = 38400
 se.bytesize = 8
 se.stopbits = 1
-se.port = '/dev/ttyACM0'
+se.port = '/dev/ttyUSB0'
 se.timeout = 0.5
 se.rtscts = 1
 se.open()                               # open port
@@ -33,7 +33,9 @@ TH_x2 = 0
 
 ### ID
 def IDFunc(ID):
-    if ID == 'FB13':
+    #~ 45E4 / C720
+    #~ print("ID: ", ID)
+    if ID == '45E4':
         Sensor = 1
     else:
         Sensor = 2
@@ -41,10 +43,13 @@ def IDFunc(ID):
 
 while True:
     response = se.readline()
+    #~ print(response)
+    
     if response != "b''":
-        tm = time.strftime("%H:%M:%S")
+        tm = time.strftime("%H:%M")
         Day = time.strftime("%D")
         response = str(response)
+        
         ### CO2 
         if response[13:14] == 'c':
             ### ID
@@ -65,7 +70,7 @@ while True:
                 f.write(str(CO2_x2)+ ',' + str(tm) + ',' + str(CO2) + '\n') 
                 CO2_x2 = CO2_x2 + 1
             f.close()
-            
+
 
         ### Temp / Hum
         if response[13:14] == 't':
@@ -89,3 +94,4 @@ while True:
                 fTH.write(str(TH_x2)+ ',' + str(tm) + ',' + str(Temp) + ',' + str(Hume) + '\n') 
                 TH_x2 = TH_x2 + 1
             fTH.close()
+
