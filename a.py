@@ -1,19 +1,17 @@
-### dmesg > yes.txt
-### dmesg > no.txt
-### diff yes.txt no.txt
-### sudo python3 a.py
+'''
+$ dmesg > yes.txt
+$ dmesg > no.txt
+$ diff yes.txt no.txt
+$ sudo python3 a.py
 
-### port
+$ sudo chown nien:nien note1.txt note2.txt
+$ wc -l [file]
+'''
+
+### import port
 import serial
 import struct
 import time                             # time immedita
-
-### draw 
-#~ import matplotlib.pyplot as plt
-#~ from tkinter import *
-#~ import numpy as np
-#~ import matplotlib.animation as animation
-#~ from matplotlib import style
 
 ### port
 se = serial.Serial()
@@ -33,8 +31,9 @@ TH_x2 = 0
 
 ### ID
 def IDFunc(ID):
-    #~ 45E4 / C720
     #~ print("ID: ", ID)
+    #~ 45E4 / C720
+    
     if ID == '45E4':
         Sensor = 1
     else:
@@ -71,7 +70,6 @@ while True:
                 CO2_x2 = CO2_x2 + 1
             f.close()
 
-
         ### Temp / Hum
         if response[13:14] == 't':
             ### ID
@@ -82,9 +80,9 @@ while True:
             ##~ print("Hume: ",response[80:86])
             Temp = int(int(response[63:69], 16))
             Hume = int(int(response[80:86], 16))
-            
+
             print("Sensor:", Sensor, ",  Time:", tm, "; Temp:", Temp, ", Hume:", Hume)
-            
+
             if Sensor == 1:
                 fTH = open("TH_1.txt", 'a')
                 fTH.write(str(TH_x1)+ ',' + str(tm) + ',' + str(Temp) + ',' + str(Hume) + '\n') 

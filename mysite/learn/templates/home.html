@@ -14,15 +14,9 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    
-    
-    Highcharts.setOptions({
-    global: {
-        useUTC: false
-    }
-});
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <style>
         body {
             background-color: Beige;
@@ -45,6 +39,13 @@
 
 <body>
     <h1>CO2 Conc.</h1>
+    
+    <!-- note ! -->
+    
+    {% load static %} 
+    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
+
+
     <ul id="myTab" class="nav nav-tabs">
             <li class="active">
                 <a href="#home" data-toggle="tab">
@@ -140,6 +141,9 @@
               <th>Data</th>
             </tr>
         </thead>
+
+        
+        
 
         <tbody>
         {% for r in article_list %}
