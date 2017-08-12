@@ -1,23 +1,52 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+    <script type="text/javascript">
+    window.onload = function() {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Line Chart"
+            },
+            axisX: {
+                interval: 10
+            },
+            data: [{
+                type: "line",
+                dataPoints: [
+                  { x: 10, y: 45 },
+                  { x: 20, y: 14 },
+                  { x: 30, y: 20 },
+                  { x: 40, y: 60 },
+                  { x: 50, y: 50 },
+                  { x: 60, y: 80 },
+                  { x: 70, y: 40 },
+                  { x: 80, y: 60 },
+                  { x: 90, y: 10 },
+                  { x: 100, y: 50 },
+                  { x: 110, y: 40 },
+                  { x: 120, y: 14 },
+                  { x: 130, y: 70 },
+                  { x: 140, y: 40 },
+                  { x: 150, y: 90 },
+                ]
+            }]
+        });
+        chart.render();
+    }
+    </script>
+    <script src="canvasjs.min.js"></script>
+    
     <meta charset="utf-8"> 
     <title> Enrironmental Monitoring </title>
-    
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    
     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="Chart.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <style>
+     <style>
         body {
             background-color: Beige;
             padding-left: 15px;
@@ -26,6 +55,7 @@
         h1 {
             color: Gray;
             text-align: center;
+            
         }
 
         p {
@@ -33,19 +63,14 @@
             font-family: 'Lobster';
             font-size: 20px;
         }
+
         <li><a href="#identifier" data-toggle="tab">Home</a></li>
+        
     </style>
 </head>
 
 <body>
     <h1>CO2 Conc.</h1>
-    
-    <!-- note ! -->
-    
-    {% load static %} 
-    <script type="text/javascript" src="{% static "fusioncharts/fusioncharts.js" %}"></script>
-
-
     <ul id="myTab" class="nav nav-tabs">
             <li class="active">
                 <a href="#home" data-toggle="tab">
@@ -70,34 +95,6 @@
             </div>
             <div class="tab-pane fade" id="S1">
                 <p>這是 Sensor 1 RRRRR</p>
-                    <p>Database </p>
-                    <table class="table table-striped">
-                    <thead>
-                        <tr>
-                          <th>Sensor</th>
-                          <th>Type</th>
-                          <th>Time</th>
-                          <th>Data</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                    {% for r in article_list %}
-                        {% if r.Sensor == 1 %}
-                            <table class="table table-striped">
-                                <tr>
-                                    <td rowspan="3"> {{r.Sensor}} </td>
-                                    <td> {{r.Tpye}} </td>
-                                    <td> {{r.Time}} </td>  
-                                    <td> {{r.Data}} </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        {% endif %}
-                    {% endfor %}
-                
-                
-                
             </div>
             <div class="tab-pane fade" id="S2">
                 <p>Sensor 2 ~~~~~</p>
@@ -123,12 +120,40 @@
             </div>
             <div class="tab-pane fade" id="S9">
                 <p> 最後一台！ </p>
+                <p>Database </p>
+                
+                
+                
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>Sensor</th>
+                      <th>Type</th>
+                      <th>Time</th>
+                      <th>Data</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                {% for r in article_list %}
+                <table class="table table-striped">
+                    <tr>   
+                        <td rowspan="3"> {{r.Sensor}} </td>
+                        <td> {{r.Tpye}} </td>
+                        <td> {{r.Time}} </td>  
+                        <td> {{r.Data}} </td>
+                    </tr>
+                  </tbody>
+                </table>
+                {% endfor %}
+        
+        
+        
             </div>
         </div>
         <br><br>
         
         <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
-        
         <div id="chartContainer" style="height: 400px; width: 100%;"></div>
          
         <p>Database </p>
@@ -141,27 +166,21 @@
               <th>Data</th>
             </tr>
         </thead>
-
         
-        
-
         <tbody>
         {% for r in article_list %}
-                <table class="table table-striped">
-                    <tr>
-                        <td rowspan="3"> {{r.Sensor}} </td>
-                        <td> {{r.Tpye}} </td>
-                        <td> {{r.Time}} </td>  
-                        <td> {{r.Data}} </td>
-                    </tr>
-                  </tbody>
-                </table>
+        <table class="table table-striped">
+            <tr>
+                <td rowspan="3"> {{r.Sensor}} </td>
+                <td> {{r.Tpye}} </td>
+                <td> {{r.Time}} </td>  
+                <td> {{r.Data}} </td>
+            </tr>
+          </tbody>
+        </table>
         {% endfor %}
-
-
-        <script type="text/javascript">
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-    
+        
+        
 </body>
 
 </html>

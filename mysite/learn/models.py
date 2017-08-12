@@ -19,4 +19,4 @@ class Article(models.Model):
     Tpye = models.CharField(u'Tpye', max_length = 50)
     
     def __unicode__(self):
-        return self.Sensor
+        return Time.Sensor
