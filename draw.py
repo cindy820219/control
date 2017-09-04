@@ -6,7 +6,10 @@ import os
 
 plt.rc('ytick', labelsize=15)
 fig = plt.figure()
-ax1 = fig.add_subplot(111)
+
+ax1 = fig.add_subplot(2,1,1)
+#~ ax2 = fig.add_subplot(2,1,2)
+
 plt.title('CO2 Conc.', fontsize=30)        # give plot a title
 plt.ylabel('CO2 Concentration (ppm)' , fontsize=20)
 plt.xlabel('Time', fontsize=20)    # make axis labels

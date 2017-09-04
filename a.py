@@ -20,7 +20,7 @@ se = serial.Serial()
 se.baudrate = 38400
 se.bytesize = 8
 se.stopbits = 1
-se.port = '/dev/ttyACM0'
+se.port = '/dev/ttyUSB0'
 se.timeout = 0.5
 se.rtscts = 1
 se.open()                               # open port
@@ -33,7 +33,8 @@ TH_x2 = 0
 
 ### ID
 def IDFunc(ID):
-    if ID == 'FB13':
+    # 45E4 && C720
+    if ID == '45E4':
         Sensor = 1
     else:
         Sensor = 2
@@ -45,10 +46,12 @@ while True:
         tm = time.strftime("%H:%M:%S")
         Day = time.strftime("%D")
         response = str(response)
+        
         ### CO2 
         if response[13:14] == 'c':
             ### ID
             ID = response[37:41]
+            print(ID)
             Sensor = IDFunc(ID)
             
             #~ print("CO2: ",response[63:69])
