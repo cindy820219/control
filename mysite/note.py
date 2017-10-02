@@ -25,7 +25,7 @@
             views.py
     '''
 
-3. 同步更改数据库表或字段
+3. 同步更改資料庫或字段
     1. 創更改的文件
     $ python3 manage.py makemigrations
 
@@ -49,6 +49,7 @@
     
     7. import and create objects!
     $ from [APP- learn].models import [Class- Article, Post]
+    ### from learn.models import Article, Post
     $ Article.objects.create(Article(Sensor="3",Data="555",Time="00:00:00",Tpye="T"))
     
     8. read objects 
@@ -70,6 +71,11 @@
     $ r = [APP- learn][0]
     $ r.Sensor
     $ r.Data
+    
+    12. gat all Data
+    $ for a in Article.objects.all():
+        print(a.Sensor, a.Time, a.Tpye, a.Data)
+
     
 4. 使用伺服器
     $ python3 manage.py runserver

@@ -3,6 +3,10 @@
 ### diff yes.txt no.txt
 ### sudo python3 a.py
 
+### sudo chown nien:nien note1.txt note2.txt
+### wc -l [file]
+
+
 ### port
 import serial
 import struct
@@ -20,7 +24,8 @@ se = serial.Serial()
 se.baudrate = 38400
 se.bytesize = 8
 se.stopbits = 1
-se.port = '/dev/ttyUSB0'
+se.port = '/dev/ttyACM0'
+# se.port = '/dev/ttyUSB0'
 se.timeout = 0.5
 se.rtscts = 1
 se.open()                               # open port
@@ -69,7 +74,8 @@ while True:
                 CO2_x2 = CO2_x2 + 1
             f.close()
             
-
+    else:
+        print('hi')
         ### Temp / Hum
         if response[13:14] == 't':
             ### ID
