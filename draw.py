@@ -4,15 +4,15 @@ import numpy as np
 import matplotlib.animation as animation
 import os
 
-plt.rc('ytick', labelsize=15)
+plt.rc('ytick', labelsize=10)
 fig = plt.figure()
 
-ax1 = fig.add_subplot(2,1,1)
+ax1 = fig.add_subplot(1,1,1)
 #~ ax2 = fig.add_subplot(2,1,2)
 
-plt.title('CO2 Conc.', fontsize=30)        # give plot a title
-plt.ylabel('CO2 Concentration (ppm)' , fontsize=20)
-plt.xlabel('Time', fontsize=20)    # make axis labels
+plt.title('CO2 Conc.', fontsize=20)        # give plot a title
+plt.ylabel('CO2 Concentration (ppm)' , fontsize=10)
+plt.xlabel('Time', fontsize=1)    # make axis labels
 
 '''
 #~ ax2 = fig.add_subplot(212)
@@ -32,7 +32,7 @@ def animate(i):
     time1 = [0,]
     time2 = [0,]
     
-    graph_data1 = open('CO2_1.txt','r').read()
+    graph_data1 = open('CO2_4.txt','r').read()
     lines = graph_data1.split('\n')
     x1 = []
     y1 = []
@@ -43,10 +43,10 @@ def animate(i):
             y1.append(y_1)
             
             time1.append(time_1)
-            ax1.text(line_1, y_1, y_1,fontsize=20)
+            ax1.text(line_1, y_1, y_1,fontsize=10)
             
     
-    graph_data2 = open('CO2_2.txt','r').read()
+    graph_data2 = open('CO2_3.txt','r').read()
     lines = graph_data2.split('\n')
     x2 = []
     y2 = []
@@ -56,7 +56,7 @@ def animate(i):
             x2.append(line_2)
             y2.append(y_2)
             #~ time1.append(time_1)
-            ax1.text(line_2, y_2, y_2, fontsize=20)
+            ax1.text(line_2, y_2, y_2, fontsize=10)
             
     ### x label to time !
     plt.xticks(list_k)
@@ -66,7 +66,7 @@ def animate(i):
     ##~ ax1.clear()
     ax1.plot(x1, y1, "r--")
     ax1.plot(x2, y2, "g")
-    ax1.set_xticklabels(time1,rotation='vertical',fontsize=15)
+    ax1.set_xticklabels(time1,rotation='vertical',fontsize=10)
   
     #~ ax1.plot(x1[-10:], y1[-10:], "r--")
     #~ ax1.plot(x2[-10:], y2[-10:], "g")
