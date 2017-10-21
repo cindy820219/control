@@ -31,6 +31,7 @@ urlpatterns = [
     #~ url(r'^grappelli/', include('grappelli.urls')),
     url(r'^$', learn_views.home, name='home'),
     url(r'^du$', learn_views.dynamic_update, name='dynamic_update'),
+    url(r'^pd', learn_views.push_data, name='push_data'),
     url(r'^admin/', admin.site.urls),
     
     

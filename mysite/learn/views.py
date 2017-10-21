@@ -37,6 +37,17 @@ def home(request):
     post_list = Post.objects.all()
     article_list = Article.objects.all()
     return render(request, 'home.html', locals())
+
+# http://127.0.0.1:8000/pd?id=4&type=co2&value=440
+def push_data(request):
+    sensor_id = int(request.GET.get('id'))
+    sensor_type = request.GET.get('type')	# co2 or hum or temp
+    value = int(request.GET.get('value'))
+    update_time = time.time()
+    
+    data = {'id':sensor_id, 'time':update_time, 'type':sensor_type, 'value': value}
+
+    return JsonResponse(data)
     
 
 #~ class LineChartJSONView(BaseLineChartView):
