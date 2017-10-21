@@ -71,7 +71,9 @@
 							      //~ $('.result').html(data);
 							      //~ console.log(typeof(data));
 							      console.log(data);
-							      var x = (new Date()).getTime(); // current time
+							      //~ var x = (new Date()).getTime(); // current time
+							      var x = Math.round(data.Time * 1000);
+							      console.log(x);
 								  series.addPoint([x, Math.random() * data.CO2], true, true);
 							    },
 							    complete: function() {
