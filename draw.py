@@ -32,7 +32,7 @@ def animate(i):
     time1 = [0,]
     time2 = [0,]
     
-    graph_data1 = open('CO2_4.txt','r').read()
+    graph_data1 = open('Oct20_CO2_4.txt','r').read()
     lines = graph_data1.split('\n')
     x1 = []
     y1 = []
@@ -46,7 +46,7 @@ def animate(i):
             ax1.text(line_1, y_1, y_1,fontsize=10)
             
     
-    graph_data2 = open('CO2_3.txt','r').read()
+    graph_data2 = open('Oct20_CO2_11.txt','r').read()
     lines = graph_data2.split('\n')
     x2 = []
     y2 = []

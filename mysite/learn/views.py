@@ -3,12 +3,15 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django import template
 
 ### for picture ! step 4.
 from learn.models import Post
 from learn.models import Article
 
+import json
+import time
 
 
 from random import randint
@@ -19,13 +22,14 @@ from django.views.generic import TemplateView
 
 
 def dynamic_update(request):
-    dy_data = mymodel.objects.filter(xxx='111')
-    dy_id = dy_data.aggregate(Max('id'))
-    dy_max_data = mymodel.objects.filter(id=dy_id['id__max'])
-    html = ''
-    json_serializer = serializers.get_serializer("json")()
-    html += json_serializer.serialize(dy_max_data)
-    return HttpResponse(html,mimetype="text/json")
+    Count = 0
+    Sensor = 4
+    tm = time.strftime("%H:%M:%S")
+    CO2 = 440
+    
+    data = {'Count':Count, 'Sensor':Sensor,  'Time':tm, 'CO2':CO2}
+
+    return JsonResponse(data)
 
 
 def home(request):

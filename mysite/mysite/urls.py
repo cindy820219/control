@@ -30,7 +30,7 @@ urlpatterns = [
     #!
     #~ url(r'^grappelli/', include('grappelli.urls')),
     url(r'^$', learn_views.home, name='home'),
-    url(r'^$', learn_views.dynamic_update, name='dynamic_update'),
+    url(r'^du$', learn_views.dynamic_update, name='dynamic_update'),
     url(r'^admin/', admin.site.urls),
     
     

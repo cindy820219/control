@@ -11,29 +11,28 @@ import serial
 import struct
 import time                             # time immedita
 
-### draw 
-import matplotlib.pyplot as plt
-from tkinter import *
-import numpy as np
-import matplotlib.animation as animation
-from matplotlib import style
-
 ### Member 
 '''
-#1  8F43 ; #2   C713 ; #3   D44E
-#4  D334 ; #5   9B34 ; #6   E41E'':''
-#7  B414 ; #8   630E ; #9   4056
-#10 3C2D
+#01  8F43 ; #02  C713 ; #03  D44E ; #04  D334 ; #05  9B34 ; 
+#06  E41E ; #07  B414 ; #08  630E ; #09  4056 ; #10  3C2D ; 
+#11   ; #12   ; #13   ; #14   ; #15   ;
+#16   ; #17   ; #18   ; #19   ; #20   ;
+#21   ; #22   ; #23   ; #24   ; #25   ;
+#26   ; #27   ; #28   ; #29   ; #30   ; 
 ''' 
-dict = {'8F43':'1' , 'C713':'2', 'D44E':'3' , 'D334':'4' , '9B34':'5', 'E41E':'6',  'B414':'7' , '630E':'8', '4056':'9', '3C2D':'10'}
+
+dict = {'0000':'1' , '0001':'2' , '1A86':'3' , '6F76':'4' , '4697':'5', \
+        '4726':'6' , '174A':'7' , '3C63':'8' , 'C59F':'9' , 'C83F':'10', \
+        '635B':'11' , '281B':'12' , 'C418':'13' , '2762':'14' , '81BD':'15', \
+        '56EC':'16' , 'AEEF':'17'}
 
 ### port
 se = serial.Serial()
 se.baudrate = 38400
 se.bytesize = 8
 se.stopbits = 1
-#~ se.port = '/dev/ttyACM0'
-se.port = '/dev/ttyUSB0'
+se.port = '/dev/ttyACM0'
+#~ se.port = '/dev/ttyUSB0'
 se.timeout = 0.5
 se.rtscts = 1
 se.open()                               # open port
@@ -50,7 +49,7 @@ while True:
 
     if response != "b''":
         tm = time.strftime("%H:%M:%S")
-        Day = time.strftime("%D")
+        Day = time.strftime("%b%d")
         #~ print(Day)
         response = str(response)
 
@@ -60,28 +59,27 @@ while True:
             ID = response[37:41]
             Sensor = dict[ID]
             
-            if Sensor == '10':
+            if Sensor == '14':
                 print('------------------------------')
             
-            if Sensor == '10':
+            if Sensor == '14':
                 Count = Count + 1
-                
-                
+
             #~ print("CO2: ",response[63:69])
             #~ int(int('0x034B', 16))
             CO2 = int(int(response[63:69], 16))
-            if int(CO2) > 65500
+
+            if int(CO2) > 60000:
                 CO2 = str(int(CO2) - 65536)
                 
-            print(NOTE + str(Count), "Sensor:", Sensor, ",  Time:", tm, "; CO2:", CO2)
+            print( NOTE + str(Count), "Sensor:", Sensor, ",  Time:", tm, "; CO2:", CO2)
                 
-            Str_note = 'CO2_'
+            Str_note = '_CO2_'
             Str_txt = '.txt'
             
-            f = open( Str_note + Sensor + Str_txt, 'a')
+            f = open( Day+Str_note + Sensor + Str_txt, 'a')
             f.write(str(Count)+ ',' + str(tm) + ',' + str(CO2) + '\n') 
-            
-            
+
             f.close()
 '''
     #~ else:
