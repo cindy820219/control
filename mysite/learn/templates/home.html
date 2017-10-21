@@ -42,6 +42,9 @@
     </style>
     
     <script>
+		
+		var interval_sec = 5;
+		
 		$(document).ready(function () {
 		    Highcharts.setOptions({
 		        global: {
@@ -59,11 +62,37 @@
 		
 		                    // set up the updating of the chart each second
 		                    var series = this.series[0];
+		                    var series1 = this.series[1];
+		                    
+		                    (function fetch_updates() {
+							  $.ajax({
+							    url: '/du', 
+							    success: function(data) {
+							      //~ $('.result').html(data);
+							      //~ console.log(typeof(data));
+							      console.log(data);
+							      var x = (new Date()).getTime(); // current time
+								  series.addPoint([x, Math.random() * data.CO2], true, true);
+							    },
+							    complete: function() {
+							      // Schedule the next request when the current one's complete
+							      setTimeout(fetch_updates, 1000 * interval_sec);
+							    }
+							  });
+							})();
+		                    
 		                    setInterval(function () {
 		                        var x = (new Date()).getTime(), // current time
-		                            y = Math.random();
-		                        series.addPoint([x, y], true, true);
-		                    }, 1000);
+		                            y = Math.random(),
+		                            y1 = Math.random() * 440;
+		                        console.log("Time: ");
+		                        console.log(x);
+		                        console.log("y1: ");
+		                        console.log(y1);
+		                        //~ series.addPoint([x, y], true, true);
+		                        series1.addPoint([x, y1], true, true);
+		                    }, 1000 * interval_sec);
+		                    
 		                }
 		            }
 		        },
@@ -78,11 +107,18 @@
 		            title: {
 		                text: 'Value'
 		            },
-		            plotLines: [{
-		                value: 0,
-		                width: 1,
-		                color: '#808080'
-		            }]
+		            plotLines: [
+			            {
+			                value: 0,
+			                width: 1,
+			                color: '#808080'
+			            },
+			            {
+			                value: 0,
+			                width: 1,
+			                color: '#080808'
+			            }
+		            ]
 		        },
 		        tooltip: {
 		            formatter: function () {
@@ -97,23 +133,44 @@
 		        exporting: {
 		            enabled: false
 		        },
-		        series: [{
-		            name: 'Random data',
-		            data: (function () {
-		                // generate an array of random data
-		                var data = [],
-		                    time = (new Date()).getTime(),
-		                    i;
-		
-		                for (i = -19; i <= 0; i += 1) {
-		                    data.push({
-		                        x: time + i * 1000,
-		                        y: Math.random()
-		                    });
-		                }
-		                return data;
-		            }())
-		        }]
+		        series: [
+			        {
+			            name: 'Random data: CO2',
+			            data: (function () {
+			                // generate an array of random data
+			                var data = [],
+			                    time = (new Date()).getTime(),
+			                    i;
+			
+			                for (i = -19; i <= 0; i += 1) {
+			                    data.push({
+			                        x: time + i * 1000 * interval_sec,
+			                        //~ y: Math.random()
+			                        y: 0
+			                    });
+			                }
+			                return data;
+			            }())
+			        },
+			        {
+			            name: 'Random data: Temprature',
+			            data: (function () {
+			                // generate an array of random data
+			                var data = [],
+			                    time = (new Date()).getTime(),
+			                    i;
+			
+			                for (i = -19; i <= 0; i += 1) {
+			                    data.push({
+			                        x: time + i * 1000 * interval_sec,
+			                        //~ y: Math.random()
+			                        y: 0
+			                    });
+			                }
+			                return data;
+			            }())
+			        }
+		        ]
 		    });
 		});
     </script>

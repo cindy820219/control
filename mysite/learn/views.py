@@ -24,7 +24,8 @@ from django.views.generic import TemplateView
 def dynamic_update(request):
     Count = 0
     Sensor = 4
-    tm = time.strftime("%H:%M:%S")
+    #~ tm = time.strftime("%H:%M:%S")
+    tm = time.time()
     CO2 = 440
     
     data = {'Count':Count, 'Sensor':Sensor,  'Time':tm, 'CO2':CO2}
