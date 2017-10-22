@@ -31,9 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #!
-    #~ 'grappelli',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +41,6 @@ INSTALLED_APPS = [
     ### app add, : step 1,
     'learn',
     # 'highcharts',
-    'chartjs'
 ]
 
 MIDDLEWARE = [

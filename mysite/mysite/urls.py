@@ -28,18 +28,12 @@ from learn import views as learn_views
 
 urlpatterns = [
     #!
-    #~ url(r'^grappelli/', include('grappelli.urls')),
     url(r'^$', learn_views.home, name='home'),
     url(r'^du$', learn_views.dynamic_update, name='dynamic_update'),
     url(r'^pd', learn_views.push_data, name='push_data'),
     url(r'^admin/', admin.site.urls),
     
-    
-    #~ url(r'^$', learn_views.dynamic_update, name='dynamic_update'),
-    ### add templates menu 
-    #~ url(r'^$', learn_views.menu, name='menu'),
-    
-    
+
     ### add templates : step 4
     #~ url(r'^$', learn_views.home, name='home'),
     ### add templates : step 5, connect to db ---> python manage.py migrate
