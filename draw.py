@@ -24,7 +24,7 @@ plt.xlabel('Time', fontsize=1)    # make axis labels
 ### intitional
 list_k = [0,]
 
-for i in range(200):
+for i in range(700):
     list_k.append(i)    
 #~ plt.xticks(list_k)
 
@@ -32,7 +32,8 @@ def animate(i):
     time1 = [0,]
     time2 = [0,]
     
-    graph_data1 = open('Oct20_CO2_4.txt','r').read()
+    ### Red
+    graph_data1 = open('Nov01_CO2_8.txt','r').read()
     lines = graph_data1.split('\n')
     x1 = []
     y1 = []
@@ -45,8 +46,8 @@ def animate(i):
             time1.append(time_1)
             ax1.text(line_1, y_1, y_1,fontsize=10)
             
-    
-    graph_data2 = open('Oct20_CO2_11.txt','r').read()
+    ### Green
+    graph_data2 = open('Nov01_CO2_16.txt','r').read()
     lines = graph_data2.split('\n')
     x2 = []
     y2 = []

@@ -10,6 +10,8 @@
 import serial
 import struct
 import time                             # time immedita
+import requests
+
 
 ### Member 
 '''
@@ -59,10 +61,10 @@ while True:
             ID = response[37:41]
             Sensor = dict[ID]
             
-            if Sensor == '14':
+            if Sensor == '8':
                 print('------------------------------')
             
-            if Sensor == '14':
+            if Sensor == '8':
                 Count = Count + 1
 
             #~ print("CO2: ",response[63:69])
@@ -76,7 +78,15 @@ while True:
                 
             Str_note = '_CO2_'
             Str_txt = '.txt'
-            
+            '''
+            url = 'http://127.0.0.1:8000/pd?'
+            url += 'id=' + Sensor
+            url += '&type=co2'
+            url += '&value=' + str(CO2)
+            r = requests.get(url)
+            print(r.url)
+            print(r.text)
+            '''
             f = open( Day+Str_note + Sensor + Str_txt, 'a')
             f.write(str(Count)+ ',' + str(tm) + ',' + str(CO2) + '\n') 
 
