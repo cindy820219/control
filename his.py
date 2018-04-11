@@ -20,7 +20,6 @@ plt.xlabel('Time', fontsize=15)    # make axis labels
 
 ### intitional xticks
 list_k = [0,]
-wc = os.system("wc note11.txt")
 
 for i in range(1000):
     list_k.append(i)    
@@ -30,7 +29,7 @@ plt.xticks(list_k)
 time1 = [0,]
 
 ### get note1 data 
-graph_data1 = open('note11.txt','r').read()
+graph_data1 = open('Nov21_CO2_24.txt','r').read()
 lines = graph_data1.split('\n')
 x1 = []
 y1 = []
@@ -44,7 +43,7 @@ for line in lines:
         ax1.text(line_1, y_1, y_1,fontsize=10)
         
 ### get note2 data 
-graph_data2 = open('note22.txt','r').read()
+graph_data2 = open('Nov21_CO2_23.txt','r').read()
 lines = graph_data2.split('\n')
 x2 = []
 y2 = []

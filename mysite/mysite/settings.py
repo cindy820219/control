@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     
     ### app add, : step 1,
     'learn',
-    # 'highcharts',
 ]
 
 MIDDLEWARE = [

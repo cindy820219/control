@@ -34,7 +34,7 @@ def animate(i):
     time1 = [0, 0]
     
     ### Red
-    graph_data1 = open('Dec13_CO2_5.txt','r').read()
+    graph_data1 = open('Dec13_CO2_21.txt','r').read()
     lines = graph_data1.split('\n')
     x1 = []
     y1 = []
@@ -48,7 +48,7 @@ def animate(i):
             ax1.text(line_1, y_1, y_1,fontsize=10)
     
     ### Temp / Hum    
-    graph_data1 = open('TH_5.txt','r').read()
+    graph_data1 = open('TH_21.txt','r').read()
     lines = graph_data1.split('\n')
     x4 = []
     y4 = []
@@ -62,7 +62,7 @@ def animate(i):
             ax1.text(line_4, y_4, y_4+'°C / '+H_4+'%',fontsize=8)
             
     ### Green
-    graph_data2 = open('Dec13_CO2_8.txt','r').read()
+    graph_data2 = open('Dec13_CO2_22.txt','r').read()
     lines = graph_data2.split('\n')
     x2 = []
     y2 = []
@@ -74,22 +74,8 @@ def animate(i):
             #~ time1.append(time_2)
             ax1.text(line_2, y_2, y_2, fontsize=10)
             
-    ### Temp / Hum    
-    graph_data1 = open('TH_8.txt','r').read()
-    lines = graph_data1.split('\n')
-    x5 = []
-    y5 = []
-    for line in lines:
-        if len(line) > 1:
-            line_5, time_5, y_5, H_5 = line.split(',')
-            x5.append(line_5)
-            y5.append(y_5)
-            
-            #~ time1.append(time_1)
-            ax1.text(line_5, y_5, y_5+'°C / '+H_5+'%',fontsize=5)
-            
     ### black
-    graph_data1 = open('Dec13_CO2_13.txt','r').read()
+    graph_data1 = open('Dec13_CO2_23.txt','r').read()
     lines = graph_data1.split('\n')
     x3 = []
     y3 = []
@@ -101,20 +87,7 @@ def animate(i):
             
             #~ time1.append(time_1)
             ax1.text(line_3, y_3, y_3,fontsize=10)        
-            
-    ### Temp / Hum    
-    graph_data1 = open('TH_13.txt','r').read()
-    lines = graph_data1.split('\n')
-    x6 = []
-    y6 = []
-    for line in lines:
-        if len(line) > 1:
-            line_6, time_6, y_6, H_6 = line.split(',')
-            x6.append(line_6)
-            y6.append(y_6)
-            
-            #~ time1.append(time_1)
-            ax1.text(line_6, y_6, y_6+'°C / '+H_6+'%',fontsize=5)
+ 
     
     ### x label to time !
     plt.xticks(list_k)

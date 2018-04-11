@@ -18,30 +18,17 @@ Including another URLconf
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import staticfiles
 
-
 from django.conf.urls import url
 from django.contrib import admin
 ### app add : step 4, import app 
 from learn import views as learn_views
-#!
-#~ from django.conf.urls import include
 
 urlpatterns = [
-    #!
     url(r'^$', learn_views.home, name='home'),
     url(r'^du$', learn_views.dynamic_update, name='dynamic_update'),
     url(r'^pd', learn_views.push_data, name='push_data'),
     url(r'^admin/', admin.site.urls),
-    
 
-    ### add templates : step 4
-    #~ url(r'^$', learn_views.home, name='home'),
-    ### add templates : step 5, connect to db ---> python manage.py migrate
-    
-    
-    ### app add : step 5
-    # add to urls
-    #~ url(r'^$', learn_views.index),
 ]
 
 
