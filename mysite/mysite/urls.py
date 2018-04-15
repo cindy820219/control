@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^du$', learn_views.dynamic_update, name='dynamic_update'),
     url(r'^pd', learn_views.push_data, name='push_data'),
     url(r'^admin/', admin.site.urls),
-
+    url(r'^gen_data', learn_views.gen_data, name='gen_data'),
 ]
 
 

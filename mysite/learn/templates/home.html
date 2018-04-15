@@ -37,282 +37,185 @@
         
     </style>
     
+    
+    <script>
+        function gen_chart (chart_id, sensor_id) {
+            var interval_sec = 5;
+            //~ console.log(sensor_id);
+            
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });
+        
+            Highcharts.chart(chart_id, {
+                chart: {
+                    type: 'spline',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    marginRight: 10,
+                    events: {
+                        load: function () {
+                            //~ console.log(sensor_id);
+        
+                            // set up the updating of the chart each second
+                            var series_co2 = this.series[0];
+                            var series_temp = this.series[1];
+                            var series_hum = this.series[2];
+                            
+                            (function fetch_updates() {
+                              console.log(sensor_id);
+                              $.ajax({
+                                url: '/du', 
+                                success: function(data) {
+                                  console.log(sensor_id);
+                                  //~ $('.result').html(data);
+                                  //~ console.log(typeof(data));
+                                  //~ console.log(data);
+                                  var rec_time = (new Date()).getTime(); // current time
+                                  //~ var rec_time = Math.round(data.Time * 1000);
+                                  //~ console.log(typeof(rec_time));
+                                  //~ console.log(rec_time);
+                                  
+                                  
+                                  value_co2 = data[sensor_id].co2.value;
+                                  value_temp = data[sensor_id].temp.value;
+                                  value_hum = data[sensor_id].hum.value;
+                                  
+                                  //~ console.log(typeof(value_co2));
+                                  console.log("co2: " + value_co2);
+                                  //~ console.log(typeof(value_temp));
+                                  console.log("temp: " + value_temp);
+                                  //~ console.log(typeof(value_hum));
+                                  console.log("hum: " + value_hum);
+                                  
+                                  
+                                  //~ series.addPoint([x, Math.random() * data.CO2], true, true);
+                                  series_co2.addPoint([rec_time, value_co2], true, true);
+                                  series_temp.addPoint([rec_time, value_temp], true, true);
+                                  series_hum.addPoint([rec_time, value_hum], true, true);
+                                  //~ series1.addPoint([x, y1], true, true);
+                                  //~ series.addPoint(value, true, true);
+                                },
+                                complete: function() {
+                                  // Schedule the next request when the current one's complete
+                                  setTimeout(fetch_updates, 1000 * interval_sec);
+                                }
+                              });
+                            })();
+                            
+                            //~ setInterval(function () {
+                                //~ console.log(sensor_id);
+                                //~ var x = (new Date()).getTime(), // current time
+                                    //~ y = Math.random(),
+                                    //~ y1 = Math.random() * 440;
+                                //~ console.log("Time: ");
+                                //~ console.log(x);
+                                //~ console.log("y1: ");
+                                //~ console.log(y1);
+                                //~ // series.addPoint([x, y], true, true);
+                                //~ series1.addPoint([x, y1], true, true);
+                            //~ }, 1000 * interval_sec);
+                        }
+                    }
+                },
+                title: {
+                    text: 'Live random data'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        },
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#080808'
+                        }
+                    ]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2);
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [
+                    {
+                        name: 'CO2',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+            
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000 * interval_sec,
+                                    //~ y: Math.random()
+                                    y: 0
+                                });
+                            }
+                            return data;
+                        }())
+                    },
+                    {
+                        name: 'Temprature',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+            
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000 * interval_sec,
+                                    //~ y: Math.random()
+                                    y: 0
+                                });
+                            }
+                            return data;
+                        }())
+                    },
+                    {
+                        name: 'Humality',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+            
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000 * interval_sec,
+                                    //~ y: Math.random()
+                                    y: 0
+                                });
+                            }
+                            return data;
+                        }())
+                    }
+                ]
+            });
+        }
+    </script>
 
-    <!-- this is about highcharts #Sensor 1-->
-    <script>
-        var interval_sec = 5;
-            
-        $(document).ready(function () {
-            Highcharts.setOptions({
-                global: {
-                    useUTC: false
-                }
-            });
-        
-            Highcharts.chart('container', {
-                chart: {
-                    type: 'spline',
-                    animation: Highcharts.svg, // don't animate in old IE
-                    marginRight: 10,
-                    events: {
-                        load: function () {
-        
-                            // set up the updating of the chart each second
-                            var series = this.series[0];
-                            var series1 = this.series[1];
-                            
-                            (function fetch_updates() {
-                              $.ajax({
-                                url: '/du', 
-                                success: function(data) {
-                                  //~ $('.result').html(data);
-                                  //~ console.log(typeof(data));
-                                  console.log(data);
-                                  //~ var x = (new Date()).getTime(); // current time
-                                  var x = Math.round(data.Time * 1000); // 1 second
-                                  console.log(x);
-                                  series.addPoint([x, Math.random() * data.CO2], true, true);
-                                },
-                                complete: function() {
-                                  // Schedule the next request when the current one's complete
-                                  setTimeout(fetch_updates, 1000 * interval_sec);
-                                }
-                              });
-                            })();
-                            
-                            setInterval(function () {
-                                var x = (new Date()).getTime(), // current time
-                                    y = Math.random(),
-                                    y1 = Math.random() * 440;
-                                console.log("Time: ");
-                                console.log(x);
-                                console.log("y1: ");
-                                console.log(y1);
-                                //~ series.addPoint([x, y], true, true);
-                                series1.addPoint([x, y1], true, true);
-                            }, 1000 * interval_sec);
-                        }
-                    }
-                },
-                title: {
-                    text: 'Live random data'
-                },
-                xAxis: {
-                    type: 'datetime',
-                    tickPixelInterval: 150
-                },
-                yAxis: {
-                    title: {
-                        text: 'Value'
-                    },
-                    plotLines: [
-                        {
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        },
-                        {
-                            value: 0,
-                            width: 1,
-                            color: '#080808'
-                        }
-                    ]
-                },
-                tooltip: {
-                    formatter: function () {
-                        return '<b>' + this.series.name + '</b><br/>' +
-                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                            Highcharts.numberFormat(this.y, 2);
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-                exporting: {
-                    enabled: false
-                },
-                series: [
-                    {
-                        name: 'Random data: CO2',
-                        data: (function () {
-                            // generate an array of random data
-                            var data = [],
-                                time = (new Date()).getTime(),
-                                i;
-            
-                            for (i = -19; i <= 0; i += 1) {
-                                data.push({
-                                    x: time + i * 1000 * interval_sec,
-                                    //~ y: Math.random()
-                                    y: 0
-                                });
-                            }
-                            return data;
-                        }())
-                    },
-                    {
-                        name: 'Random data: Temprature',
-                        data: (function () {
-                            // generate an array of random data
-                            var data = [],
-                                time = (new Date()).getTime(),
-                                i;
-            
-                            for (i = -19; i <= 0; i += 1) {
-                                data.push({
-                                    x: time + i * 1000 * interval_sec,
-                                    //~ y: Math.random()
-                                    y: 0
-                                });
-                            }
-                            return data;
-                        }())
-                    }
-                ]
-            });
-        });
-    </script>
-    
-    
-    
-    
-    <!-- this is about highcharts #Sensor 1-->
-    <script>
-        var interval_sec = 5;
-            
-        $(document).ready(function () {
-            Highcharts.setOptions({
-                global: {
-                    useUTC: false
-                }
-            });
-        
-            Highcharts.chart('container2', {
-                chart: {
-                    type: 'spline',
-                    animation: Highcharts.svg, // don't animate in old IE
-                    marginRight: 10,
-                    events: {
-                        load: function () {
-        
-                            // set up the updating of the chart each second
-                            var series = this.series[0];
-                            var series1 = this.series[1];
-                            
-                            (function fetch_updates() {
-                              $.ajax({
-                                url: '/du', 
-                                success: function(data) {
-                                  //~ $('.result').html(data);
-                                  //~ console.log(typeof(data));
-                                  console.log(data);
-                                  //~ var x = (new Date()).getTime(); // current time
-                                  var x = Math.round(data.Time * 1000);
-                                  console.log(x);
-                                  series.addPoint([x, Math.random() * data.CO2], true, true);
-                                },
-                                complete: function() {
-                                  // Schedule the next request when the current one's complete
-                                  setTimeout(fetch_updates, 1000 * interval_sec);
-                                }
-                              });
-                            })();
-                            
-                            setInterval(function () {
-                                var x = (new Date()).getTime(), // current time
-                                    y = Math.random(),
-                                    y1 = Math.random() * 440;
-                                console.log("Time: ");
-                                console.log(x);
-                                console.log("y1: ");
-                                console.log(y1);
-                                //~ series.addPoint([x, y], true, true);
-                                series1.addPoint([x, y1], true, true);
-                            }, 1000 * interval_sec);
-                        }
-                    }
-                },
-                title: {
-                    text: 'Live random data'
-                },
-                xAxis: {
-                    type: 'datetime',
-                    tickPixelInterval: 150
-                },
-                yAxis: {
-                    title: {
-                        text: 'Value'
-                    },
-                    plotLines: [
-                        {
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        },
-                        {
-                            value: 0,
-                            width: 1,
-                            color: '#080808'
-                        }
-                    ]
-                },
-                tooltip: {
-                    formatter: function () {
-                        return '<b>' + this.series.name + '</b><br/>' +
-                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                            Highcharts.numberFormat(this.y, 2);
-                    }
-                },
-                legend: {
-                    enabled: false
-                },
-                exporting: {
-                    enabled: false
-                },
-                series: [
-                    {
-                        name: 'Random data: CO2',
-                        data: (function () {
-                            // generate an array of random data
-                            var data = [],
-                                time = (new Date()).getTime(),
-                                i;
-            
-                            for (i = -19; i <= 0; i += 1) {
-                                data.push({
-                                    x: time + i * 1000 * interval_sec,
-                                    //~ y: Math.random()
-                                    y: 0
-                                });
-                            }
-                            return data;
-                        }())
-                    },
-                    {
-                        name: 'Random data: Temprature',
-                        data: (function () {
-                            // generate an array of random data
-                            var data = [],
-                                time = (new Date()).getTime(),
-                                i;
-            
-                            for (i = -19; i <= 0; i += 1) {
-                                data.push({
-                                    x: time + i * 1000 * interval_sec,
-                                    //~ y: Math.random()
-                                    y: 0
-                                });
-                            }
-                            return data;
-                        }())
-                    }
-                ]
-            });
-        });
-    </script>
-    
-    
-    
     
     
     
@@ -356,44 +259,53 @@
                 <img src="https://ppt.cc/fH15zx@.jpg" width="400" height="300"></a>
                 <p>Sensor 01 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <script>gen_chart('container1', 1)</script>
                 
                 <p>Sensor 02 </p>
                 <!-- this is about highchart -->
                 <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
-            
+                <script>gen_chart('container2', 2)</script>
+                
                 <p>Sensor 03 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <script>gen_chart('container3', 3)</script>
             </div>
             
             <div class="tab-pane fade" id="S02">
                 <p>Sensor 04 </p>
                 <!-- this is about highchart -->
-                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <script>gen_chart('container4', 4)</script>
             
                 <p>Sensor 05 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <script>gen_chart('container5', 5)</script>
                 
                 <p>Sensor 06 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container6" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <script>gen_chart('container6', 6)</script>
             
             </div>
             
             <div class="tab-pane fade" id="S03">
                 <p>Sensor 07 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container7" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <script>gen_chart('container7', 7)</script>
                 
                 <p>Sensor 08 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container8" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <script>gen_chart('container8', 8)</script>
                 
                 <p>Sensor 09 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container9" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <script>gen_chart('container9', 9)</script>
             </div>
                 
 <!--
