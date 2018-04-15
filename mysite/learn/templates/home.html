@@ -38,7 +38,7 @@
     </style>
     
 
-    <!-- this is about highcharts -->
+    <!-- this is about highcharts #Sensor 1-->
     <script>
         var interval_sec = 5;
             
@@ -50,6 +50,144 @@
             });
         
             Highcharts.chart('container', {
+                chart: {
+                    type: 'spline',
+                    animation: Highcharts.svg, // don't animate in old IE
+                    marginRight: 10,
+                    events: {
+                        load: function () {
+        
+                            // set up the updating of the chart each second
+                            var series = this.series[0];
+                            var series1 = this.series[1];
+                            
+                            (function fetch_updates() {
+                              $.ajax({
+                                url: '/du', 
+                                success: function(data) {
+                                  //~ $('.result').html(data);
+                                  //~ console.log(typeof(data));
+                                  console.log(data);
+                                  //~ var x = (new Date()).getTime(); // current time
+                                  var x = Math.round(data.Time * 1000); // 1 second
+                                  console.log(x);
+                                  series.addPoint([x, Math.random() * data.CO2], true, true);
+                                },
+                                complete: function() {
+                                  // Schedule the next request when the current one's complete
+                                  setTimeout(fetch_updates, 1000 * interval_sec);
+                                }
+                              });
+                            })();
+                            
+                            setInterval(function () {
+                                var x = (new Date()).getTime(), // current time
+                                    y = Math.random(),
+                                    y1 = Math.random() * 440;
+                                console.log("Time: ");
+                                console.log(x);
+                                console.log("y1: ");
+                                console.log(y1);
+                                //~ series.addPoint([x, y], true, true);
+                                series1.addPoint([x, y1], true, true);
+                            }, 1000 * interval_sec);
+                        }
+                    }
+                },
+                title: {
+                    text: 'Live random data'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickPixelInterval: 150
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value'
+                    },
+                    plotLines: [
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        },
+                        {
+                            value: 0,
+                            width: 1,
+                            color: '#080808'
+                        }
+                    ]
+                },
+                tooltip: {
+                    formatter: function () {
+                        return '<b>' + this.series.name + '</b><br/>' +
+                            Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                            Highcharts.numberFormat(this.y, 2);
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                exporting: {
+                    enabled: false
+                },
+                series: [
+                    {
+                        name: 'Random data: CO2',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+            
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000 * interval_sec,
+                                    //~ y: Math.random()
+                                    y: 0
+                                });
+                            }
+                            return data;
+                        }())
+                    },
+                    {
+                        name: 'Random data: Temprature',
+                        data: (function () {
+                            // generate an array of random data
+                            var data = [],
+                                time = (new Date()).getTime(),
+                                i;
+            
+                            for (i = -19; i <= 0; i += 1) {
+                                data.push({
+                                    x: time + i * 1000 * interval_sec,
+                                    //~ y: Math.random()
+                                    y: 0
+                                });
+                            }
+                            return data;
+                        }())
+                    }
+                ]
+            });
+        });
+    </script>
+    
+    
+    
+    
+    <!-- this is about highcharts #Sensor 1-->
+    <script>
+        var interval_sec = 5;
+            
+        $(document).ready(function () {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });
+        
+            Highcharts.chart('container2', {
                 chart: {
                     type: 'spline',
                     animation: Highcharts.svg, // don't animate in old IE
@@ -172,6 +310,23 @@
             });
         });
     </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </head>
 
 <body>
@@ -183,50 +338,62 @@
                 </a>
             </li>
 
-            <li><a href="#S01" data-toggle="tab">Sensor 01 ~ 03</a></li>
-            <li><a href="#S04" data-toggle="tab">Sensor 04 ~ 06</a></li>
-            <li><a href="#S07" data-toggle="tab">Sensor 07 ~ 09</a></li>
-            <li><a href="#S10" data-toggle="tab">Sensor 10 ~ 12</a></li>
-            <li><a href="#S13" data-toggle="tab">Sensor 13 ~ 15</a></li>
+            <li><a href="#S01" data-toggle="tab">Sensor 01~03</a></li>
+            <li><a href="#S02" data-toggle="tab">Sensor 04~06</a></li>
+            <li><a href="#S03" data-toggle="tab">Sensor 07~09</a></li>
+
             
         </ul>
         <br>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="home">
-                <p> 這是監測網站首頁 </p>                
-                
+                <p> Home page </p>                
                 <!-- this is the place of picture -->
                 <div style="background-image:url(https://ppt.cc/fH15zx@.jpg);background-position:center top;width:800px;height:500px;background-repeat:no-repeat;"></div>
-                
             </div>
  
             <div class="tab-pane fade" id="S01">
-                <p>這是 Sensor 01~03 </p>
-                
+                <img src="https://ppt.cc/fH15zx@.jpg" width="400" height="300"></a>
+                <p>Sensor 01 </p>
                 <!-- this is about highchart -->
-                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
                 
-                <div style="background-image:url(R1.gif);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+                <p>Sensor 02 </p>
+                <!-- this is about highchart -->
+                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+            
+                <p>Sensor 03 </p>
+                <!-- this is about highchart -->
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+            </div>
+            
+            <div class="tab-pane fade" id="S02">
+                <p>Sensor 04 </p>
+                <!-- this is about highchart -->
+                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+            
+                <p>Sensor 05 </p>
+                <!-- this is about highchart -->
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
                 
-            </div>
-            <div class="tab-pane fade" id="S04">
-                <p>Sensor 04~06</p>
-                <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+                <p>Sensor 06 </p>
+                <!-- this is about highchart -->
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+            
             </div>
             
-            <div class="tab-pane fade" id="S07">
-                <p>Sensor 07~09 </p>
-                <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
-            </div>
-            
-            <div class="tab-pane fade" id="S10">
-                <p>Sensor 10~12 </p>
-                <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
-            </div>
-            
-            <div class="tab-pane fade" id="S13">
-                <p>Sensor 13~15 </p>
-                <div style="background-image:url(http://s6.gigacircle.com/media/s6_53e8bc171636a.jpg);background-position:center top;width:500px;height:300px;background-repeat:no-repeat;"></div>
+            <div class="tab-pane fade" id="S03">
+                <p>Sensor 07 </p>
+                <!-- this is about highchart -->
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                
+                <p>Sensor 08 </p>
+                <!-- this is about highchart -->
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                
+                <p>Sensor 09 </p>
+                <!-- this is about highchart -->
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
             </div>
                 
 <!--
@@ -240,7 +407,6 @@
                     </tr>
                 </thead>
                 
-
                 <tbody>
                     {% for r in article_list %}
                     <table class="table table-striped">
@@ -252,8 +418,8 @@
                         </tr>
                     {% endfor %}
                  </tbody>
--->
             </table>
+-->
             </div>
         </div>
         <br><br>

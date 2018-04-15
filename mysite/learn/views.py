@@ -69,8 +69,6 @@ def home(request):
 
 # http://127.0.0.1:8000/pd?id=4&type=co2&value=440
 def push_data(request):
-    
-    ### no idea !
     sensor_id = str(request.GET.get('id'))
     sensor_type = request.GET.get('type')   # co2 or hum or temp
     value = int(request.GET.get('value'))
@@ -94,10 +92,7 @@ def push_data(request):
     print(sensors[sensor_id]['co2'])
     
     data = {'id':sensor_id, 'time':update_time, 'type':sensor_type, 'value': value}
-    
-    
-    ### new add!
-    data = test(data)
-    
+    #~ data = 
+    #~ data = test(data)
     return JsonResponse(data)
     
