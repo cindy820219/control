@@ -270,6 +270,18 @@ def gen_data(req):
             data[sensor_id] = tmp
             
         del tmp
+        
+        
+        ### new add - start
+        if sensor_id == 9:
+            print('-------------------')
+            print(data)
+            
+            Day = time.strftime("%b%d")
+            f = open(Day, 'a')
+            f.write(str(data))
+        ### new add - End
+        
 
     #~ return(data)
     return JsonResponse(data)
