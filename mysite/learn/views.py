@@ -296,15 +296,15 @@ def get_data (sensor_id):
         empty_data = {
             'co2': {
                 'value': 0,
-                'count': 0
+                'time': 0
             },
             'temp': {
                 'value': 0,
-                'count': 0
+                'time': 0
             },
             'hum': {
                 'value': 0,
-                'count': 0
+                'time': 0
             }
         }
         return empty_data
@@ -326,10 +326,28 @@ def get_data (sensor_id):
     
     pprint(data[sensor_id])
     
+    empty_elem = {
+        'value': 0,
+        'time': 0
+    }
+    
     ret_data = {}
-    ret_data['co2'] = data[sensor_id]['co2'][-1]
-    ret_data['temp'] = data[sensor_id]['temp'][-1]
-    ret_data['hum'] = data[sensor_id]['hum'][-1]
+    ret_data['id'] = sensor_id
+    
+    if ('co2' in data[sensor_id]):
+        ret_data['co2'] = data[sensor_id]['co2'][-1]
+    else:
+        ret_data['co2'] = empty_elem
+    
+    if ('temp' in data[sensor_id]):
+        ret_data['temp'] = data[sensor_id]['temp'][-1]
+    else:
+        ret_data['temp'] = empty_elem
+        
+    if ('hum' in data[sensor_id]):
+        ret_data['hum'] = data[sensor_id]['hum'][-1]
+    else:
+        ret_data['hum'] = empty_elem
     
     return ret_data
 
@@ -375,15 +393,15 @@ def push_data(request):
     #~ 1: {
         #~ 'co2': {
             #~ 'value': 0,
-            #~ 'count': 0
+            #~ 'time': 0
         #~ },
         #~ 'temp': {
             #~ 'value': 0,
-            #~ 'count': 0
+            #~ 'time': 0
         #~ },
         #~ 'hum': {
             #~ 'value': 0,
-            #~ 'count': 0
+            #~ 'time': 0
         #~ }
     #~ }
     

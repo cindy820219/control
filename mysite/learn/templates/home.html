@@ -78,22 +78,25 @@
                                   //~ console.log(rec_time);
                                   
                                   
-                                  value_co2 = data[sensor_id].co2.value;
-                                  value_temp = data[sensor_id].temp.value;
-                                  value_hum = data[sensor_id].hum.value;
+                                  co2_value = data.co2.value;
+                                  co2_time = data.co2.time * 1000;
+                                  temp_value = data.temp.value;
+                                  temp_time = data.temp.time * 1000;
+                                  hum_value = data.hum.value;
+                                  hum_time = data.hum.time * 1000;
                                   
                                   //~ console.log(typeof(value_co2));
-                                  console.log("co2: " + value_co2);
+                                  console.log("co2: " + co2_value + " time: " + co2_time);
                                   //~ console.log(typeof(value_temp));
-                                  console.log("temp: " + value_temp);
+                                  console.log("temp: " + temp_value + " time: " + temp_time);
                                   //~ console.log(typeof(value_hum));
-                                  console.log("hum: " + value_hum);
+                                  console.log("hum: " + hum_value + " time: " + hum_time);
                                   
                                   
                                   //~ series.addPoint([x, Math.random() * data.CO2], true, true);
-                                  series_co2.addPoint([rec_time, value_co2], true, true);
-                                  series_temp.addPoint([rec_time, value_temp], true, true);
-                                  series_hum.addPoint([rec_time, value_hum], true, true);
+                                  series_co2.addPoint([co2_time, co2_value], true, true);
+                                  series_temp.addPoint([temp_time, temp_value], true, true);
+                                  series_hum.addPoint([hum_time, hum_value], true, true);
                                   //~ series1.addPoint([x, y1], true, true);
                                   //~ series.addPoint(value, true, true);
                                 },
