@@ -12,6 +12,7 @@ from learn.models import Article
 
 import json
 import time
+from pprint import pprint
 
 from random import randint
 from django.views.generic import TemplateView
@@ -20,134 +21,136 @@ from random import randint
 
 
 sensors = {}
-data = {
-    1: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    2: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    3: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    4: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    5: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    6: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    7: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    8: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-    9: {
-        'co2': {
-            'value': 0,
-            'count': 0
-        },
-        'temp': {
-            'value': 0,
-            'count': 0
-        },
-        'hum': {
-            'value': 0,
-            'count': 0
-        }
-    },
-}
+global data
+data = {}
+#~ data = {
+    #~ 1: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 2: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 3: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 4: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 5: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 6: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 7: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 8: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+    #~ 9: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ },
+#~ }
 
 
 def gen_data(req):
@@ -187,12 +190,12 @@ def gen_data(req):
         
         ### snesor 1 & sensor 2
         if sensor_id == 1 or sensor_id == 2:
-            co2_random = randint(450, 460)
-            hum_random = randint(85, 87)
+            co2_random = randint(480, 490)
+            hum_random = randint(95, 97)
             
             tmp['co2']['value'] = co2_random
             tmp['co2']['count'] = tmp['co2']['count'] + 1
-            tmp['temp']['value'] = 15
+            tmp['temp']['value'] = 17
             tmp['temp']['count'] = tmp['co2']['count']
             tmp['hum']['value'] = hum_random
             tmp['hum']['count'] = tmp['co2']['count']
@@ -201,12 +204,12 @@ def gen_data(req):
             
         ### snesor 3 & sensor 4 & sensor 9    
         if sensor_id == 3 or sensor_id == 4 or sensor_id == 9:
-            co2_random = randint(500, 510)
-            hum_random = randint(87, 89)
+            co2_random = randint(530, 540)
+            hum_random = randint(96, 97)
             
             tmp['co2']['value'] = co2_random
             tmp['co2']['count'] = tmp['co2']['count'] + 1
-            tmp['temp']['value'] = 15
+            tmp['temp']['value'] = 17
             tmp['temp']['count'] = tmp['co2']['count']
             tmp['hum']['value'] = hum_random
             tmp['hum']['count'] = tmp['co2']['count']
@@ -215,12 +218,12 @@ def gen_data(req):
         
         ### snesor 5
         if sensor_id == 5:
-            co2_random = randint(470, 480)
-            hum_random = randint(85, 87)
+            co2_random = randint(500, 510)
+            hum_random = randint(95, 96)
             
             tmp['co2']['value'] = co2_random
             tmp['co2']['count'] = tmp['co2']['count'] + 1
-            tmp['temp']['value'] = 14
+            tmp['temp']['value'] = 18
             tmp['temp']['count'] = tmp['co2']['count']
             tmp['hum']['value'] = hum_random
             tmp['hum']['count'] = tmp['co2']['count']
@@ -229,12 +232,12 @@ def gen_data(req):
             
         ### snesor 6
         if sensor_id == 6:
-            co2_random = randint(490, 500)
-            hum_random = randint(85, 87)
+            co2_random = randint(520, 530)
+            hum_random = randint(95, 96)
             
             tmp['co2']['value'] = co2_random
             tmp['co2']['count'] = tmp['co2']['count'] + 1
-            tmp['temp']['value'] = 15
+            tmp['temp']['value'] = 18
             tmp['temp']['count'] = tmp['co2']['count']
             tmp['hum']['value'] = hum_random
             tmp['hum']['count'] = tmp['co2']['count']
@@ -243,12 +246,12 @@ def gen_data(req):
             
         ### snesor 7
         if sensor_id == 7:
-            co2_random = randint(520, 530)
-            hum_random = randint(87, 89)
+            co2_random = randint(550, 560)
+            hum_random = randint(96, 97)
             
             tmp['co2']['value'] = co2_random
             tmp['co2']['count'] = tmp['co2']['count'] + 1
-            tmp['temp']['value'] = 15
+            tmp['temp']['value'] = 17
             tmp['temp']['count'] = tmp['co2']['count']
             tmp['hum']['value'] = hum_random
             tmp['hum']['count'] = tmp['co2']['count']
@@ -257,12 +260,12 @@ def gen_data(req):
         
         ### snesor 8
         if sensor_id == 8:
-            co2_random = randint(530, 540)
-            hum_random = randint(87, 89)
+            co2_random = randint(560, 570)
+            hum_random = randint(96, 97)
             
             tmp['co2']['value'] = co2_random
             tmp['co2']['count'] = tmp['co2']['count'] + 1
-            tmp['temp']['value'] = 15
+            tmp['temp']['value'] = 17
             tmp['temp']['count'] = tmp['co2']['count']
             tmp['hum']['value'] = hum_random
             tmp['hum']['count'] = tmp['co2']['count']
@@ -286,10 +289,53 @@ def gen_data(req):
     #~ return(data)
     return JsonResponse(data)
 
-def get_data ():
-    return data
+def get_data (sensor_id):
+    
+    #~ if not(hasattr(data, str(sensor_id))):
+    if not(sensor_id in data):
+        empty_data = {
+            'co2': {
+                'value': 0,
+                'count': 0
+            },
+            'temp': {
+                'value': 0,
+                'count': 0
+            },
+            'hum': {
+                'value': 0,
+                'count': 0
+            }
+        }
+        return empty_data
+    
+    #~ 1: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ }
+    
+    pprint(data[sensor_id])
+    
+    ret_data = {}
+    ret_data['co2'] = data[sensor_id]['co2'][-1]
+    ret_data['temp'] = data[sensor_id]['temp'][-1]
+    ret_data['hum'] = data[sensor_id]['hum'][-1]
+    
+    return ret_data
 
 def dynamic_update(request):
+    sensor_id = str(request.GET.get('id'))
+    sensor_id = str(sensor_id)
     #~ print(sensors.keys())
     #~ for key in sensors.keys():
         #~ print(sensors[key])
@@ -306,7 +352,7 @@ def dynamic_update(request):
     ### delete ?
     #~ data = test(data)
     
-    res = get_data()
+    res = get_data(sensor_id)
     return JsonResponse(res)
 
 def home(request):
@@ -322,25 +368,55 @@ def push_data(request):
     value = int(request.GET.get('value'))
     update_time = time.time()
     
-    if not(hasattr(sensors, str(sensor_id))):
-        sensors[sensor_id] = {}
+    print("Get Data: " + str(sensor_id) + " : " + str(sensor_type) + " : " + str(value))
+    #~ print("Data in memory: ")
+    #~ pprint(data)
     
-    if not(hasattr(sensors[sensor_id], 'co2')):
-        sensors[sensor_id]['co2'] = []
+    #~ 1: {
+        #~ 'co2': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'temp': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ },
+        #~ 'hum': {
+            #~ 'value': 0,
+            #~ 'count': 0
+        #~ }
+    #~ }
+    
+    #~ if not(hasattr(data, str(sensor_id))):
+    if not(str(sensor_id) in data):
+        print("First time see this sensor id")
+        data[sensor_id] = {}
+    
+    #~ if not(hasattr(data[sensor_id], sensor_type)):
+    if not(sensor_type in data[sensor_id]):
+        print("First time see this sensor type of this sensor id")
+        data[sensor_id][sensor_type] = []
     
     tmp_data = {'time':update_time, 'value': value}
     
-    tmp = sensors[sensor_id]['co2'].copy()
+    #~ tmp = data[str(sensor_id)][sensor_type].copy()
+    tmp = data[str(sensor_id)][sensor_type]
+    #~ print("Data Copied: ")
+    #~ print(tmp)
+    
     tmp.append(tmp_data.copy())
-    print('TMPPPPPPPP============')
-    print(tmp)
+    #~ print("Append new row:")
+    #~ print(tmp)
     
-    sensors[sensor_id]['co2'] = tmp.copy()
-    print("PDDDDD")
-    print(sensors[sensor_id]['co2'])
+    data[sensor_id][sensor_type] = tmp.copy()
+    del tmp
+    #~ print("PD Final:")
+    #~ print(data[sensor_id][sensor_type])
+    #~ pprint(data)
     
-    data = {'id':sensor_id, 'time':update_time, 'type':sensor_type, 'value': value}
+    ret_data = {'id':sensor_id, 'time':update_time, 'type':sensor_type, 'value': value}
     
     #~ data = 
-    
-    return JsonResponse(data)
+    #~ del tmp
+    del tmp_data
+    return JsonResponse(ret_data)

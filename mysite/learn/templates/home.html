@@ -66,7 +66,7 @@
                             (function fetch_updates() {
                               console.log(sensor_id);
                               $.ajax({
-                                url: '/du', 
+                                url: '/du?id=' + sensor_id, 
                                 success: function(data) {
                                   console.log(sensor_id);
                                   //~ $('.result').html(data);

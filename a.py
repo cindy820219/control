@@ -25,7 +25,7 @@ import requests
 
 dict = {'3B3B':'8' , '3ED9':'11' , '8AC2':'12', '1DCA':'14' , 'D6DC':'15', \
         '62C7':'13' , '7AC2':'18' , '2DDB':'17' , '6292':'23' , '7F2F':'22', \
-        'BDF6':'5' , '96E6':'24', '61A0':'20','8683':'19', 'AB0D':'21', \
+        'BDF6':'5' , '96E6':'24', '61A0':'20','8683':'19', 'AB0D':'1', \
         }
 
 ### port
@@ -119,7 +119,7 @@ while True:
                 
             Str_note = '_CO2_'
             Str_txt = '.txt'
-            '''
+            
             url = 'http://127.0.0.1:8000/pd?'
             url += 'id=' + Sensor
             url += '&type=co2'
@@ -127,7 +127,7 @@ while True:
             r = requests.get(url)
             print(r.url)
             print(r.text)
-            '''
+            
             f = open( Day+Str_note + Sensor + Str_txt, 'a')
             f.write(str(Count)+ ',' + str(tm) + ',' + str(CO2_new) + '\n') 
 
@@ -154,8 +154,26 @@ while True:
                 
                 print("         ", "Sensor:", Sensor, ",  Time:", tm, "; Temp:", Temp, ", Hume:", Hume)
                 
+                url = 'http://127.0.0.1:8000/pd?'
+                url += 'id=' + Sensor
+                url += '&type=hum'
+                url += '&value=' + str(Hume)
+                r = requests.get(url)
+                print(r.url)
+                print(r.text)
+
+                url = 'http://127.0.0.1:8000/pd?'
+                url += 'id=' + Sensor
+                url += '&type=temp'
+                url += '&value=' + str(Temp)
+                r = requests.get(url)
+                print(r.url)
+                print(r.text)
+
+                
                 f = open( Str_note + Sensor + Str_txt, 'a')
                 f.write(str(Count)+ ',' + str(tm) + ',' + str(Temp) + ',' + str(Hume) + '\n') 
+
 
 
                 f.close()
