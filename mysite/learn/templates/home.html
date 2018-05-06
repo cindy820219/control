@@ -168,7 +168,7 @@
                                 time = (new Date()).getTime(),
                                 i;
             
-                            for (i = -19; i <= 0; i += 1) {
+                            for (i = -50; i <= 0; i += 1) {
                                 data.push({
                                     x: time + i * 1000 * interval_sec,
                                     //~ y: Math.random()
@@ -186,7 +186,7 @@
                                 time = (new Date()).getTime(),
                                 i;
             
-                            for (i = -19; i <= 0; i += 1) {
+                            for (i = -50; i <= 0; i += 1) {
                                 data.push({
                                     x: time + i * 1000 * interval_sec,
                                     //~ y: Math.random()
@@ -204,7 +204,7 @@
                                 time = (new Date()).getTime(),
                                 i;
             
-                            for (i = -19; i <= 0; i += 1) {
+                            for (i = -50; i <= 0; i += 1) {
                                 data.push({
                                     x: time + i * 1000 * interval_sec,
                                     //~ y: Math.random()
@@ -221,81 +221,91 @@
 </head>
 
 <body>
-    <h1>姑場環境監測系統 (CO2/Temp/Hum)</h1>
+    <h1>菇場環境監測系統 (CO2/Temp/Hum)</h1>
     <ul id="myTab" class="nav nav-tabs">
             <li class="active">
                 <a href="#home" data-toggle="tab">
                     Home !
                 </a>
             </li>
+<!--
 
             <li><a href="#S01" data-toggle="tab">Sensor 01~03</a></li>
             <li><a href="#S02" data-toggle="tab">Sensor 04~06</a></li>
             <li><a href="#S03" data-toggle="tab">Sensor 07~09</a></li>
+-->
 
         </ul>
         <br>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade in active" id="home">
                 <p> Home page </p>                
-                <!-- this is the place of picture -->
-                <!--
-                <div style="background-image:url(https://ppt.cc/fH15zx@.jpg);background-position:center top;width:800px;height:500px;background-repeat:no-repeat;"></div>
-                -->
                   <img src="https://ppt.cc/fNHarx@.png" width="800" height="1200"></a>  
  
+<!--
             <div class="tab-pane fade" id="S01">
+-->
             <!--  <img src="https://ppt.cc/fH15zx@.jpg" width="400" height="300"></a>  -->
                 <p>Sensor 01 </p>
                 <!-- this is about highchart -->
-                <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container1" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container1', 1)</script>
                 
                 <p>Sensor 02 </p>
                 <!-- this is about highchart -->
-                <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container2" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container2', 2)</script>
                 
                 <p>Sensor 03 </p>
                 <!-- this is about highchart -->
-                <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container3" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container3', 3)</script>
+<!--
             </div>
+-->
             
+<!--
             <div class="tab-pane fade" id="S02">
+-->
                 <p>Sensor 04 </p>
                 <!-- this is about highchart -->
-                <div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="container4" style="min-width: 620px; height: 400px; margin: 0 auto"></div>
                 <script>gen_chart('container4', 4)</script>
             
                 <p>Sensor 05 </p>
                 <!-- this is about highchart -->
-                <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div id="container5" style="min-width: 620px; height: 400px; margin: 0 auto"></div>
                 <script>gen_chart('container5', 5)</script>
                 
                 <p>Sensor 06 </p>
                 <!-- this is about highchart -->
-                <div id="container6" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container6" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container6', 6)</script>
             
+<!--
             </div>
+-->
             
+<!--
             <div class="tab-pane fade" id="S03">
+-->
                 <p>Sensor 07 </p>
                 <!-- this is about highchart -->
-                <div id="container7" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container7" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container7', 7)</script>
                 
                 <p>Sensor 08 </p>
                 <!-- this is about highchart -->
-                <div id="container8" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container8" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container8', 8)</script>
                 
                 <p>Sensor 09 </p>
                 <!-- this is about highchart -->
-                <div id="container9" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                <div id="container9" style="min-width: 620px; height: 400px; margin: 0 auto"></div> 
                 <script>gen_chart('container9', 9)</script>
+<!--
             </div>
+-->
                 
 <!--
             <table class="table table-striped">
