@@ -120,7 +120,7 @@ while True:
             Str_note = '_CO2_'
             Str_txt = '.txt'
             
-            url = 'http://127.0.0.1:8000/pd?'
+            url = 'http://206.189.86.183:8000/pd?'
             url += 'id=' + Sensor
             url += '&type=co2'
             url += '&value=' + str(CO2)
@@ -154,7 +154,7 @@ while True:
                 
                 print("         ", "Sensor:", Sensor, ",  Time:", tm, "; Temp:", Temp, ", Hume:", Hume)
                 
-                url = 'http://127.0.0.1:8000/pd?'
+                url = 'http://206.189.86.183:8000/pd?'
                 url += 'id=' + Sensor
                 url += '&type=hum'
                 url += '&value=' + str(Hume)
@@ -162,7 +162,7 @@ while True:
                 print(r.url)
                 print(r.text)
 
-                url = 'http://127.0.0.1:8000/pd?'
+                url = 'http://206.189.86.183:8000/pd?'
                 url += 'id=' + Sensor
                 url += '&type=temp'
                 url += '&value=' + str(Temp)
