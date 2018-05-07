@@ -23,9 +23,14 @@ import requests
 #26   ; #27   ; #28   ; #29   ; #30   ; 
 ''' 
 
-dict = {'3B3B':'8' , '3ED9':'11' , '8AC2':'12', '1DCA':'14' , 'D6DC':'15', \
-        '62C7':'13' , '7AC2':'18' , '2DDB':'17' , '6292':'23' , '7F2F':'22', \
-        'BDF6':'5' , '96E6':'24', '61A0':'20','8683':'19', 'AB0D':'1', \
+#~ dict = {'3B3B':'8' , '3ED9':'11' , '8AC2':'12', '1DCA':'14' , 'D6DC':'15', \
+        #~ '62C7':'13' , '7AC2':'18' , '2DDB':'17' , '6292':'23' , '7F2F':'22', \
+        #~ 'BDF6':'5' , '96E6':'24', '61A0':'20','8683':'19', 'AB0D':'1', \
+        #~ }
+
+dict = {'AB0D':'1', '61A0':'2', '62C7':'3' , \
+        '96E6':'4', 'BDF6':'5', '7AC2':'6' , \
+        '6292':'7', '3B3B':'8', '3ED9':'9', \
         }
 
 ### port
@@ -79,36 +84,37 @@ while True:
             
             if Sensor =='8':
                 #~ CO2_new = str(int(int(CO2) * 1.1587))
-                CO2_new = str(int(int(CO2) * 1.1987))
-            if Sensor =='12':
-                CO2_new = str(int(int(CO2) * 1.0598))
-            if Sensor =='15':
-                CO2_new = str(int(int(CO2) * 1.1121))
-            if Sensor =='11':
-                CO2_new = str(int(int(CO2) * 1.1011))
-            if Sensor =='14':
-                CO2_new = str(int(int(CO2) * 1.0051))
+                CO2_new = str(int(int(CO2) * 1.4875))
+            #~ if Sensor =='12':
+                #~ CO2_new = str(int(int(CO2) * 1.0598))
+            #~ if Sensor =='15':
+                #~ CO2_new = str(int(int(CO2) * 1.1121))
+            if Sensor =='9':
+                #~ CO2_new = str(int(int(CO2) * 1.1011))
+                CO2_new = str(int(int(CO2) * 1.3395))
+            #~ if Sensor =='14':
+                #~ CO2_new = str(int(int(CO2) * 1.0051))
             if Sensor =='5':
                 CO2_new = str(int(int(CO2) * 1.0103))
-            if Sensor =='20':
+            if Sensor =='2':
                 CO2_new = str(int(int(CO2) * 1.0047))
-            if Sensor =='19':
-                CO2_new = str(int(int(CO2) * 1.0889))
+            #~ if Sensor =='19':
+                #~ CO2_new = str(int(int(CO2) * 1.0889))
             
             
-            if Sensor =='21':
+            if Sensor =='1':
                 CO2_new = str(int(int(CO2) * 1.0321))
-            if Sensor =='23':
+            if Sensor =='3':
                 CO2_new = str(int(int(CO2) * 1.0158))
-            if Sensor =='13':
+            if Sensor =='7':
                 CO2_new = str(int(int(CO2) * 1.1121))
-            if Sensor =='18':
+            if Sensor =='6':
                 CO2_new = str(int(int(CO2) * 1.1317))
-            if Sensor =='17':
-                CO2_new = str(int(int(CO2) * 1.2302))
-            if Sensor =='22':
-                CO2_new = str(int(int(CO2) * 1.0184))
-            if Sensor =='24':
+            #~ if Sensor =='17':
+                #~ CO2_new = str(int(int(CO2) * 1.2302))
+            #~ if Sensor =='22':
+                #~ CO2_new = str(int(int(CO2) * 1.0184))
+            if Sensor =='4':
                 #~ CO2_new = str(int(int(CO2) * 1.0069))
                 CO2_new = str(int(int(CO2) * 0.818))
             
@@ -123,7 +129,7 @@ while True:
             url = 'http://206.189.86.183:8000/pd?'
             url += 'id=' + Sensor
             url += '&type=co2'
-            url += '&value=' + str(CO2)
+            url += '&value=' + str(CO2_new)
             r = requests.get(url)
             print(r.url)
             print(r.text)
@@ -157,7 +163,7 @@ while True:
                 url = 'http://206.189.86.183:8000/pd?'
                 url += 'id=' + Sensor
                 url += '&type=hum'
-                url += '&value=' + str(Hume)
+                url += '&value=' + str(Hume+5)
                 r = requests.get(url)
                 print(r.url)
                 print(r.text)
