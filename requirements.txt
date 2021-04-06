@@ -7,7 +7,7 @@ iso8601==0.1.12
 pkg-resources==0.0.0
 pprint==0.1
 pytz==2018.4
-PyYAML==5.1
+PyYAML==5.4
 requests==2.20.0
 serial==0.0.66
 urllib3==1.24.2
